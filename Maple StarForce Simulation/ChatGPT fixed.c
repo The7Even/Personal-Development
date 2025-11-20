@@ -273,7 +273,7 @@ int main(void) {
     char* avgde_str = add_commas((long long)avgde);
 
     // Final output (minimal prints)
-    // system("cls");
+    system("cls"); // 너 왜 주석처리 돼있니..? 안바꿨나
     printf("--------------------------final result--------------------------\n");
     printf("Target Star Force : %d\n", target);
     printf("Processed Simulations Amount : %d\n", repeat_total);
