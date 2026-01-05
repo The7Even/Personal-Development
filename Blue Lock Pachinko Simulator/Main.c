@@ -21,6 +21,7 @@ int streak = 0;
 int rget = 0;
 int Question = 0;
 int fin7500 = 0;
+int record = 0;
 
 // 역대 기록
 int hwin = 0;
@@ -75,6 +76,7 @@ unsigned int randomresult() {
 // LT중 당첨
 void LTget() {
     bonus7500 = 0;
+    fin7500 = 0;
     last = 0;
     streak++;
     printf("\n%d連, ", streak);
@@ -177,8 +179,9 @@ int main(void)
     printf("Select Mode.\n");
     printf("Mode 1. Single Game\n");
     printf("Mode 2. Multiple Games\n");
-    printf("Mode 3. Until 7500\n>>>");
+    printf("Mode 3. Until 7500\n");
     printf("Mode 4. Until 15000\n");
+    printf("Mode 5. Target to X\n>>>");
     scanf_s("%d", &time);
     if (time == 2)
     {
@@ -196,6 +199,10 @@ int main(void)
     else if (time == 4)
     {
         time = -3;
+    }
+    else if (time == 5)
+    {
+        time = 10;
     }
 
     if (time == -1)
@@ -253,10 +260,18 @@ int main(void)
                 break;
         }
     }
-    else if (time == -2 || time == -3)
+    else if (time == -2 || time == -3 || time == 10)
     {
-        time = time * -1;
+        int tarpos = 0;
+        if (time < 0)
+            time = time * -1;
+        if (time == 10)
+        {
+            printf("How much do you want to get?\n>>>");
+            scanf_s("%d", &tarpos);
+        }
         while (0 < 1) {
+            record++;
             system("cls");
             trial = 0;
             gotballs = 0;
@@ -295,11 +310,16 @@ int main(void)
             else // 시x LT 들어가지도 못함
                 printf("\nfailed to Get Special Fever...\n");
 
-            if (fin7500 == time-1)
+            if (tarpos == 0 && fin7500 == time - 1)
+                break;
+            else if (tarpos != 0 && tarpos <= rget)
                 break;
         }
 
         printf("\n----------Result----------\n");
+        if (tarpos == 0)
+            printf("Got %d in trial %d (%.4f%%)\n", (time - 1) * 7500, record, 1.0 / record * 100);
+
         printf("%d 玉 Used. ￦%d Spent.\n", trial * 14, trial * 560);
         printf("You have %d 玉.\n", gotballs);
         printf("Your Balance : ￦ %d\n", (gotballs - (trial * 14)) * 40);
