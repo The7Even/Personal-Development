@@ -178,6 +178,7 @@ int main(void)
     printf("Mode 1. Single Game\n");
     printf("Mode 2. Multiple Games\n");
     printf("Mode 3. Until 7500\n>>>");
+    printf("Mode 4. Until 15000\n");
     scanf_s("%d", &time);
     if (time == 2)
     {
@@ -191,6 +192,10 @@ int main(void)
     else if (time == 3)
     {
         time = -2;
+    }
+    else if (time == 4)
+    {
+        time = -3;
     }
 
     if (time == -1)
@@ -248,8 +253,9 @@ int main(void)
                 break;
         }
     }
-    else if (time == -2)
+    else if (time == -2 || time == -3)
     {
+        time = time * -1;
         while (0 < 1) {
             system("cls");
             trial = 0;
@@ -289,7 +295,7 @@ int main(void)
             else // 시x LT 들어가지도 못함
                 printf("\nfailed to Get Special Fever...\n");
 
-            if (fin7500 == 1)
+            if (fin7500 == time-1)
                 break;
         }
 
